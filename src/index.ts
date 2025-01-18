@@ -1,8 +1,24 @@
-import { initializeServer, startServer } from "./server"
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import itemRoutes from "./routes/item.routes";
+const AutoIncrement = require("mongoose-sequence")(mongoose);
+const app = express();
 
-process.on('unhandledRejection', (err) => {
-    console.error(err)
-    process.exit(1)
-})
+const PORT: string | number = process.env.PORT || 4000;
+app.use(cors());
+app.use(express.json());
+app.use(itemRoutes);
 
-await startServer()
+const uri: string =
+  process.env.MONGO_DB_URI || "mongodb://localhost:27017/item_db";
+mongoose
+  .connect(uri)
+  .then(() =>
+    app.listen(PORT, () =>
+      console.log(`Server running on http://localhost:${PORT}`)
+    )
+  )
+  .catch((error) => {
+    throw error;
+  });

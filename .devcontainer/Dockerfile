@@ -1,12 +1,22 @@
-FROM node:20
+# Use node image as base image
+FROM node:22-alpine
 
-# Install basic development tools
-RUN apt update && apt install -y less man-db sudo
+# Create app directory
+WORKDIR /usr/src/app
 
-# Ensure default `node` user has access to `sudo`
-ARG USERNAME=node
-RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
-    && chmod 0440 /etc/sudoers.d/$USERNAME
+# copy package.json and package-lock.json
+COPY package*.json ./
 
-# Set `DEVCONTAINER` environment variable to help with orientation
-ENV DEVCONTAINER=true
+# install dependencies
+RUN npm install
+
+# copy all files to the container
+COPY . .
+# build the app
+RUN npm run build 
+
+# Expose the port your app runs on 
+EXPOSE 3000
+
+# Run the app
+CMD [ "node", "dist/index.js" ]
