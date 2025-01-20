@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "fc8d3729-acef-42bc-86e5-d3e7112527e8",
+		"name": "el-dorado-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "20493111"
+	},
+	"item": [
+		{
+			"name": "Create Item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"item \",\r\n    \"price\": 20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:4000/items"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Item by id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"OwO\",\r\n    \"price\":-40\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:4000/items/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all items",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:4000/items"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Item",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:4000/items/184"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Item",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:4000/items/1"
+			},
+			"response": []
+		}
+	]
+}
